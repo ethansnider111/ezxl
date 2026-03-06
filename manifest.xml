@@ -2,33 +2,20 @@
 <OfficeApp
   xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
-  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
   xsi:type="TaskPaneApp">
 
-  <!-- ═══════════════════════════════════════════
-       IDENTITY
-  ═══════════════════════════════════════════ -->
   <Id>E7AE8201-1146-4F4D-8A90-1C9EC57C1CE6</Id>
   <Version>1.0.0.0</Version>
   <ProviderName>EZXL</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
 
   <DisplayName DefaultValue="EZXL"/>
-  <Description DefaultValue="Your Excel helper — formulas, shortcuts, and quick actions all in one place."/>
+  <Description DefaultValue="Your Excel helper for formulas, shortcuts, and quick actions."/>
 
-  <!-- ═══════════════════════════════════════════
-       ICONS — host these PNGs on your Netlify site
-       Replace sensational-moonbeam-e4f204 with your actual subdomain
-  ═══════════════════════════════════════════ -->
   <IconUrl DefaultValue="https://ethansnider111.github.io/ezxl/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://ethansnider111.github.io/ezxl/icon-80.png"/>
+  <SupportUrl DefaultValue="https://ethansnider111.github.io/ezxl/"/>
 
-  <SupportUrl DefaultValue="https://ethansnider111.github.io/ezxl"/>
-
-  <!-- ═══════════════════════════════════════════
-       HOST + PERMISSIONS
-  ═══════════════════════════════════════════ -->
   <Hosts>
     <Host Name="Workbook"/>
   </Hosts>
@@ -38,76 +25,5 @@
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
-
-  <!-- ═══════════════════════════════════════════
-       RIBBON BUTTON (version overrides)
-  ═══════════════════════════════════════════ -->
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
-
-    <Hosts>
-      <Host xsi:type="Workbook">
-
-        <DesktopFormFactor>
-
-          <FunctionFile resid="Commands.Url"/>
-
-          <ExtensionPoint xsi:type="PrimaryCommandSurface">
-            <OfficeTab id="TabHome">
-              <Group id="EZXL.Group">
-                <Label resid="GroupLabel"/>
-
-                <!-- Main ribbon button that opens the task pane -->
-                <Control xsi:type="Button" id="EZXL.OpenPane">
-                  <Label resid="TaskpaneButton.Label"/>
-                  <Supertip>
-                    <Title resid="TaskpaneButton.Label"/>
-                    <Description resid="TaskpaneButton.Tooltip"/>
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Icon.16x16"/>
-                    <bt:Image size="32" resid="Icon.32x32"/>
-                    <bt:Image size="80" resid="Icon.80x80"/>
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url"/>
-                  </Action>
-                </Control>
-
-              </Group>
-            </OfficeTab>
-          </ExtensionPoint>
-
-        </DesktopFormFactor>
-
-      </Host>
-    </Hosts>
-
-    <!-- ═══════════════════════════════════════
-         RESOURCES — swap sensational-moonbeam-e4f204 everywhere
-    ═══════════════════════════════════════ -->
-    <Resources>
-      <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://ethansnider111.github.io/ezxl/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://ethansnider111.github.io/ezxl/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://ethansnider111.github.io/ezxl/icon-80.png"/>
-      </bt:Images>
-
-      <bt:Urls>
-        <bt:Url id="Commands.Url"  DefaultValue="https://ethansnider111.github.io/ezxl/index.html"/>
-        <bt:Url id="Taskpane.Url"  DefaultValue="https://ethansnider111.github.io/ezxl/index.html"/>
-      </bt:Urls>
-
-      <bt:ShortStrings>
-        <bt:String id="GroupLabel"           DefaultValue="EZXL"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="EZXL"/>
-      </bt:ShortStrings>
-
-      <bt:LongStrings>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Open EZXL — your Excel helper for formulas, shortcuts, and quick actions."/>
-      </bt:LongStrings>
-    </Resources>
-
-  </VersionOverrides>
 
 </OfficeApp>
