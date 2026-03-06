@@ -2,7 +2,6 @@
 <OfficeApp
   xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
   xsi:type="TaskPaneApp">
 
   <Id>E7AE8201-1146-4F4D-8A90-1C9EC57C1CE6</Id>
@@ -26,61 +25,5 @@
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
-
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
-
-    <Hosts>
-      <Host xsi:type="Workbook">
-        <DesktopFormFactor>
-
-          <FunctionFile resid="Taskpane.Url"/>
-
-          <ExtensionPoint xsi:type="PrimaryCommandSurface">
-            <OfficeTab id="TabHome">
-              <Group id="EZXL.Group">
-                <Label resid="GroupLabel"/>
-                <Control xsi:type="Button" id="EZXL.OpenPane">
-                  <Label resid="ButtonLabel"/>
-                  <Supertip>
-                    <Title resid="ButtonLabel"/>
-                    <Description resid="ButtonTooltip"/>
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Icon16"/>
-                    <bt:Image size="32" resid="Icon32"/>
-                    <bt:Image size="80" resid="Icon80"/>
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>EZXL.Taskpane</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url"/>
-                  </Action>
-                </Control>
-              </Group>
-            </OfficeTab>
-          </ExtensionPoint>
-
-        </DesktopFormFactor>
-      </Host>
-    </Hosts>
-
-    <Resources>
-      <bt:Images>
-        <bt:Image id="Icon16" DefaultValue="https://ethansnider111.github.io/ezxl/icon-16.png"/>
-        <bt:Image id="Icon32" DefaultValue="https://ethansnider111.github.io/ezxl/icon-32.png"/>
-        <bt:Image id="Icon80" DefaultValue="https://ethansnider111.github.io/ezxl/icon-80.png"/>
-      </bt:Images>
-      <bt:Urls>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://ethansnider111.github.io/ezxl/index.html"/>
-      </bt:Urls>
-      <bt:ShortStrings>
-        <bt:String id="GroupLabel"    DefaultValue="EZXL"/>
-        <bt:String id="ButtonLabel"   DefaultValue="EZXL"/>
-      </bt:ShortStrings>
-      <bt:LongStrings>
-        <bt:String id="ButtonTooltip" DefaultValue="Open EZXL — your Excel helper for formulas, shortcuts, and quick actions."/>
-      </bt:LongStrings>
-    </Resources>
-
-  </VersionOverrides>
 
 </OfficeApp>
