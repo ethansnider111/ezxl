@@ -1888,7 +1888,7 @@ function applySettings(){
   let sEl=document.getElementById("textsize-style");
   if(!sEl){sEl=document.createElement("style");sEl.id="textsize-style";document.head.appendChild(sEl);}
   // Only zoom the list content — settings panel stays fixed so buttons don't move under your finger
-  sEl.textContent=sc===1?"":"#list,#sort-bar,#chain-banner,#settings-content{zoom:"+sc+"}";
+  sEl.textContent=sc===1?"":"#list,#sort-bar,#chain-banner{zoom:"+sc+"}";
   document.documentElement.setAttribute("data-compact", SETTINGS.compactCards?"1":"0");
   document.documentElement.setAttribute("data-nodesc", SETTINGS.showDesc?"0":"1");
   // re-render settings panel live so user sees changes take effect immediately
