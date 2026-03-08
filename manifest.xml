@@ -45,6 +45,11 @@
                     <Title resid="ButtonLabel"/>
                     <Description resid="ButtonTooltip"/>
                   </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon16"/>
+                    <bt:Image size="32" resid="Icon32"/>
+                    <bt:Image size="80" resid="Icon80"/>
+                  </Icon>
                   <Action xsi:type="ShowTaskpane">
                     <TaskpaneId>EZXL.Taskpane</TaskpaneId>
                     <SourceLocation resid="Taskpane.Url"/>
@@ -59,6 +64,11 @@
     </Hosts>
 
     <Resources>
+      <bt:Images>
+        <bt:Image id="Icon16" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHUlEQVR4nGNUOhr3n4ECwESJ5lEDRg0YNWAwGQAAcxUCZCl9Eq0AAAAASUVORK5CYII="/>
+        <bt:Image id="Icon32" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAM0lEQVR4nO3OQQEAMAjEsGNSJmxu0TVk8EkNNHX7/Sx2NucAAAAAAAAAAAAAAAAAAABJMpgYAoSxEEOnAAAAAElFTkSuQmCC"/>
+        <bt:Image id="Icon80" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAxUlEQVR4nO3QQQ2AMADAwDEpE4ZbdDEP64OQ3Cloeq3nfgfH5tcBf2dgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYLQBCvsC5AqPDxIAAAAASUVORK5CYII="/>
+      </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://ethansnider111.github.io/ezxl/index.html"/>
       </bt:Urls>
