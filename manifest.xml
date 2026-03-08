@@ -2,6 +2,7 @@
 <OfficeApp
   xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
   xsi:type="TaskPaneApp">
 
   <Id>E7AE8201-1146-4F4D-8A90-1C9EC57C1CE6</Id>
@@ -25,5 +26,61 @@
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <DesktopFormFactor>
+
+          <FunctionFile resid="Taskpane.Url"/>
+
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="EZXL.Group">
+                <Label resid="GroupLabel"/>
+                <Control xsi:type="Button" id="EZXL.OpenPane">
+                  <Label resid="ButtonLabel"/>
+                  <Supertip>
+                    <Title resid="ButtonLabel"/>
+                    <Description resid="ButtonTooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon16"/>
+                    <bt:Image size="32" resid="Icon32"/>
+                    <bt:Image size="80" resid="Icon80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>EZXL.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon16" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA8UlEQVR4nGNgGAUDDxhhjHmPtv/3EjJl6Hi8isFX2JxBm0ueYfaLHQxrHh1h+Mv0l4H1LwsDAwMDwxe27wx/mf4xMDAwMNyzXgTRr3Q07v+UedP/v/jy5n9AZPB/biHe/17Bvv/ZeDn+c8kI/rfclv+fT0Pyv3qF539eJdH/bLwc/9l4Of4rHY37z4TuJElJSYau3m6GeQvnMyxevpRBKsSY4cGUfQySQYYMDAwMDLrTohnEvfUYGBgYGJ54rIJ4Qelo3P8nHquI9rfMjjDMMFA6GvefGM1PPFZhN4BYwMbL8R/ZAIwwIBWQ5QJKLaUuAADc20oa4VxY5wAAAABJRU5ErkJggg=="/>
+        <bt:Image id="Icon32" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB0ElEQVR4nO2UTUhUURiGn+vcuQ3qFSVJYSazAcGVgggW/u8GXeQPCIMwi6LRZhtZSFpi7RKRUBfuBnRkREFIGTdqCwmn3VirQGQ4NYSb6yRkkt4W4sUhmyaoK8F94Cy+9xzO+56Pcw5YWFhYWFww0tnCveHTzTLerg1KKQHcGz5deMJm+eOKdLFdG5Syzpusa6gnnhDGWFpZ5vGTgRQtnhC0d7RT1FpB1cxdHM58bDmXqJzyca2nkbwKF9VzveSWF6cNIqeb7LzVwdto1KifDQ2Tq6q8iiyh2O2sra6h7e1RcNNNaaCZb5+T6EfHiOAbcsquZNSJcztwyvziAvGEYGz8paG9GB3B6XTiv+NH0zTQdXYm1sm+Xsjl+jJ2Jl9z9PUwI3P4ww703OulpbWFvvsPeLe1Zei2bAXJdnIWe54jY/PfBjhLzY0aHvY/IjQdYnYmZOiSnEVpoIlkTHDwSePq7TqSMfF3AswvLgDwUQg2N6PIsoy324u32wvA0OBTIvsxlEKVD8+X+b5/QH5VCSX+BnZX3gNQPtwGwOHuF2KBaWNv4QmjqA7d9GfoinSl1GkvoRmY+hMKT/inDki/WPtPUFSHfuEBzPSzsLD4P/gBEAya9fn6JjsAAAAASUVORK5CYII="/>
+        <bt:Image id="Icon80" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAEnUlEQVR4nO3Ze0xbVRwH8G9vW1oonYyNbYzxGnWNQjQLMCNkyohRZiZuOomESJwR2SZG3SZmuocalbDMsajbmMPHfMSJCImaiK8BYZsJKMYNRrKNVyl2CI5RWdcXrX+Q3u72tuWyvlj2+yQk9/zOube//nLOvadcgBBCCCGEEEIIIYQQQgghhBBCCCEkUETXNpaeLLaHKpEbRW/2p5yaMY4DKp4wrnWSuA7Q5tUGL5sbzJLGAl6McTOOzAAV0EdUQB/x7oHe9GkHIBaLBY1dfd8D6OrqAgDUf9uAjMzMGSXW0tyCJwqLII2KQOq+AkiUcrbvfMUPGO8Y4J0zL0eN5GdXsW3L2BV0bamFdcIEAEj/qhQixvkQ7XzhGIxDl2eUl6tZPwMtlw3Q1LRyYkkb74UkUsaJhc1TIGFDNifWf6iFLV6gzGgGulq1Mgc9Fy5MO+6R/HWeE5BI8HV9HdIzMzhxk9HIHl861YOoFcmIzlYBAKRzI5BQcg96q35mxyRtyoE4Ioxtj/xyFuN/agR/l+sV8hm4fccrvOIZDAZUVlRyYpqaVljGDGw7OisF0VkpAICY+1Mx5854ts80rMfg0d8CmLVTSAuYtzoPJaXP8OLbX3oZ58+d48SsEyb0VzdzYglPr0SkehHii+92Bu129B1ogs1oCUTKPCErYGJSIt7ZX8WLf/HZ52iob3B7zniHBqO/drNtiVIO9ev5YGTOO9HF705jolvn/4Q9CEkBZTIZqo8chnKOkhPvPHMGu3fs8nru4NFTMI38x7ZFYudXuDp4CUPH2vyb7DR8eog0tTa7jf/e3u71wfHGW28iNS2NE9Pr9dhYUgqz2ez1MyevWtB/sBnq3Q/x+vreb4LdMjlt3v4U9Bn46GPrUVhUyItvef5FaAaEPTUjb13gNq5QxfiU2/UIyjbGYZl6Gd6urODFqw8ewk+NPwq6RnhCNBYXuN+UxxdnQf+XFqZhveCcfBW0GahQKHC45gOEh4dz4u1tbdjjsmXxRCRmkPxcLkQSZ9pG3Th7zMgkU79ERCJ3pwdE0ApYuXcPUlQqTuzf0VFsLt0Eq9Uq6BqLCzIQkTSfbV/pGcHZ8joYh8bYWORtsVi45g7/JC1AUAr45FMbkL/2YU7MZrOhbHMZhi8OC7qGQrUAi9Yud55vmUTfe8dhM1rQ++5x2CdtbF9c4QqEL5nrn+SnEfACMgyDna/xtyZVe/fhZOsJYdeQipFclsv5R8DQl23szDP0jkD3TQdnfFJZLmeLEygB2cYAwK5Xd+KTjz4GwzCQSqW8/q3l27C1fJvH881mM1SJSwEAcUV3QR4XxfZNdOsw/P1pznhdfQduSU+EImXqSaxIiUHsuuX4u+4Pj5+Rtv9xj32aD0/gn8ZOj/0OIf8tPB3l7bFY+KDznmYzWdF3oAmwc1/h2CdtU0v6mn1g7Pp0RCTPh79o82qhzatFmFJud/yxa8LxsoTeicyMT0v4ZuHuZZLDrF/Csx1vBnqr9s1GyO2MnYGub9yJMFQ0L8KUcjtA98CAogL6iJawF44l7A3NQEIIIYQQQgghhBBCCCGEEELILPc/kGVRdW6nffsAAAAASUVORK5CYII="/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://ethansnider111.github.io/ezxl/index.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel"    DefaultValue="EZXL"/>
+        <bt:String id="ButtonLabel"   DefaultValue="EZXL"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="ButtonTooltip" DefaultValue="Open EZXL — your Excel helper for formulas, shortcuts, and quick actions."/>
+      </bt:LongStrings>
+    </Resources>
+
+  </VersionOverrides>
 
 </OfficeApp>
