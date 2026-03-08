@@ -12,8 +12,6 @@
   <DisplayName DefaultValue="EZXL"/>
   <Description DefaultValue="Your Excel helper for formulas, shortcuts, and quick actions."/>
 
-  <IconUrl DefaultValue="https://ethansnider111.github.io/ezxl/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://ethansnider111.github.io/ezxl/icon-80.png"/>
   <SupportUrl DefaultValue="https://ethansnider111.github.io/ezxl/"/>
 
   <Hosts>
