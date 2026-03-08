@@ -33,6 +33,8 @@
       <Host xsi:type="Workbook">
         <DesktopFormFactor>
 
+          <FunctionFile resid="Taskpane.Url"/>
+
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="EZXL.Group">
@@ -63,16 +65,16 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon16" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA1ElEQVR4nGNgoBAwInOUjsb9J1bjPetFKHoZlI7G/Wfj5SAawyxjhGl+4rGKZOfL7AhjYCJZFxqgngF9E/sZHj1/whAZHcmwcetmhkfPnzDkFxYwyMZbMYi6aTMoZDowKGY7MrCL8qIYwIJu4sePnxhCAoIY7B0dGPbs2s3Aws/JoD8rjuFq0SoGyQADwl6QlJRk6OrtZpi3cD7D4uVLGaRCjBkeTNnHIBlkyMDAwMCgOy2aQdxbD65+4GMBIwwI2QgDMBcPfDqAA4ryArIhxFoIy40AXXhax3+gtI8AAAAASUVORK5CYII="/>
-        <bt:Image id="Icon32" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB3UlEQVR4nO2XT0iTYRzHP9veTVEnilLCltpA8KQggkn+qZvoITUYDGEHo2m7RipSlli3RCKqQzdBF4qCkPJ60TpIuG6zTkLIeGqEl9clpJK+HWRP00Cn6F4P7xdeeN7vc/h+3u/h9/IDg2U5bHiW/Pp5h367PipzDwB4lvy6aJo473zcqldCWNMdDiCaJmTTlnSHJ8utev81YJRMABPABLiYAHUN9URjQj6z83M8fPzogBeNCdra27jcUkHV+F0yXXnYsjOofOunpKuR3Ao31ZPd5JQXHQmgHHV5+1Y7n8Nh+f50cIgcp5P36iwOu53FhUW0jQ3yaz2UBm+y/TOOvruHGP1Edtml0zeQ0NTMNNGY4MWrl9J7PjKMy+UicCeApmmg66y9/kDW1UIK6stYe/OR3d87KYXDCRvoutdNc0szPfcf8GVlRfq2LAcW2/632HMzUw4/FiBZNddq6O3vIzQW4t14SPoWxUpp8AbxiGDrh8aVzjriEXE2AFMz0wB8F4Ll5TCKouDr8OHr8AEwOPAEdTOCo9DJ6rM5/mxukVdVTHGggfX5rwCUD7UCsLP+i0hw7L8M83dsApgAJkDKk/As5Fa98pyYO4Y3YIX9XS2ZLh1KrGeG74aGb8d/AfjcsM16WwzDAAAAAElFTkSuQmCC"/>
-        <bt:Image id="Icon80" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAFN0lEQVR4nO2ce1BUVRzHv/vABRYMUVREXrLJFEyNA9gEYyHTFDZFWsbEMDHZRKjRVGo0lo9qKgbH1MlULHpoNZkRzFQz0UtgUJuBoklBZlReC4QEiWy47ovd/mD27t69e9m7nl2W8vf5a8/vnHP3t5/57b1nH/cABBFIZN4MXnKqyOavRGYaXVlHJbmRNOhGEueKJ5FTdrqK68897ouc/hMsrsvntcVEigp0lncjiXPFWaQ7iXJ3k0ieA+fX7+5UJhBI8oRMJdFtBbpOIsR98ATa7ZI899i9OFehaAUS0uAEUvVJw7UKqQIZIYGMkEBGSCAjJJAREsgICWSEBDJCAhkhgYyQQEZIICMkkBESyAgJZIQEMkICGSGBjJBARkggI0pvBnf390KhUEgau+qe+9De3g4AqPm6FukZGV4l1tjQiMcLChEUEYqUPflQhgdzfRfKv8NYa69gztzsZCQ+s5Jrm0evon3TcVjGjQCAtC9KIJM7/p3R9vwxGAaueJWXKzO+As1X9NBWNfFiCevvhjJMxYvNmqtG3LosXqznUCMnz194VYGurFyRjc6LFz2OezhvjXgCSiW+rKlGWkY6L240GLjHl093ImJ5IiKzNACAoDmhiCu+C117f+TGJGzIhiJ0Ftce/ukcxn7XSn4t10vAK3DrtpcF8vR6PSrKK3gxbVUTzKN6rh2ZmYTIzCQAQNS9KZh9eyzXZxzSoe/IL37M2kFABeauykVxydOC+NYXX8KF8+d5Mcu4ET2VDbxY3FMrEJa8ELFFdzqCNhu6D9TDajD7I2UBARMYnxCPt/ftFcQ/++RT1NbUup0z1qrFyM8dXFsZHozk1/IgVznORJe+OYPxjkHfJyxCQASqVCpUvn8Y4bPDefG2s2exc9uOKef2HTkN4/A/XFumcLyEa32XMXCs2bfJeoDpIlLf1OA2/mtLy5QXjtfffAMpqam8mE6nw/riEphMpimfc+KaGT0HG5C880FBX/e79bCZJzzm7UumvQIfeXQtCgoLBPFNz70Aba+0q2bYzfPdxtWaKKbcrodpWcbYWZq8FG9VlAvilQcP4Ye67yUdIyQuEovy3S/KY4syofujH8YhneScWJm2ClSr1Thc9R5CQkJ48ZbmZuxyWbKIIVPIkfhsDmRKR9qGwTHusVylnPwkIvPq9hcmpk1gxe5dSNJoeLG/R0awsWQDLBaLpGMsyk9HaMI8rn21cxjnyqphGBjlYmG3RGPBA7f5JmkJTIvAJ55ch7zVD/FiVqsVpRtLMXRpSNIx1Jr5WLh6mWO+eQLd+0/AajCj650TsE1Yub6YguUIWTzHN8l7wO8C5XI5tr8qXJrs3b0Hp5pOSjtGkAKJpTm8LwIGPm/mKk/fNYzBr1p54xNKc3hLHH/hl2UMAOx4ZTs+/vAjyOVyBAUFCfo3l23B5rItovNNJhM08UsAADGFdyA4JoLrG+8YxNC3Z3jjB2tacVNaPNRJk1didVIUotcsw5/Vv4k+R+q+x0T7tB+cxF91baL9dgL+WdgT4bdGY8H9jnOa1WhB94F6wMa/58U2YZ18SzutA6PXpiE0cR78CfeeoD+ZS8d++1dX1lHZjK/AmQ4JZIQEMkICGSGBjJBARkggIySQERLICAlkhAQyQgIZIYGMkEBGSCAjJJAREsgICWSEBDJCAhkhgYxwAu2bC7ru3Ejwcf5FDmD8Yf3/jpRi4r2FqQql4bwVqOg5kCRKQyDQ2S5JFOK6Ea3bCiSJ0qF9pEVg3kfaGdrJXBzaS18EqXvpE4z8C0w6lq0zRqOLAAAAAElFTkSuQmCC"/>
+        <bt:Image id="Icon16" DefaultValue="https://ethansnider111.github.io/ezxl/icon-16.png"/>
+        <bt:Image id="Icon32" DefaultValue="https://ethansnider111.github.io/ezxl/icon-32.png"/>
+        <bt:Image id="Icon80" DefaultValue="https://ethansnider111.github.io/ezxl/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://ethansnider111.github.io/ezxl/index.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel"  DefaultValue="EZXL"/>
-        <bt:String id="ButtonLabel" DefaultValue="EZXL"/>
+        <bt:String id="GroupLabel"    DefaultValue="EZXL"/>
+        <bt:String id="ButtonLabel"   DefaultValue="EZXL"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="ButtonTooltip" DefaultValue="Open EZXL — your Excel helper for formulas, shortcuts, and quick actions."/>
