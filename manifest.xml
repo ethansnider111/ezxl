@@ -33,8 +33,6 @@
       <Host xsi:type="Workbook">
         <DesktopFormFactor>
 
-          <FunctionFile resid="Taskpane.Url"/>
-
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
               <Group id="EZXL.Group">
@@ -65,16 +63,16 @@
 
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon16" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAHUlEQVR4nGNUOhr3n4ECwESJ5lEDRg0YNWAwGQAAcxUCZCl9Eq0AAAAASUVORK5CYII="/>
-        <bt:Image id="Icon32" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAM0lEQVR4nO3OQQEAMAjEsGNSJmxu0TVk8EkNNHX7/Sx2NucAAAAAAAAAAAAAAAAAAABJMpgYAoSxEEOnAAAAAElFTkSuQmCC"/>
-        <bt:Image id="Icon80" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAxUlEQVR4nO3QQQ2AMADAwDEpE4ZbdDEP64OQ3Cloeq3nfgfH5tcBf2dgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYGRgZGBkYLQBCvsC5AqPDxIAAAAASUVORK5CYII="/>
+        <bt:Image id="Icon16" DefaultValue="https://ethansnider111.github.io/ezxl/icon-16.png"/>
+        <bt:Image id="Icon32" DefaultValue="https://ethansnider111.github.io/ezxl/icon-32.png"/>
+        <bt:Image id="Icon80" DefaultValue="https://ethansnider111.github.io/ezxl/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://ethansnider111.github.io/ezxl/index.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel"    DefaultValue="EZXL"/>
-        <bt:String id="ButtonLabel"   DefaultValue="EZXL"/>
+        <bt:String id="GroupLabel"  DefaultValue="EZXL"/>
+        <bt:String id="ButtonLabel" DefaultValue="EZXL"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="ButtonTooltip" DefaultValue="Open EZXL — your Excel helper for formulas, shortcuts, and quick actions."/>
