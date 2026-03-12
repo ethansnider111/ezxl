@@ -33,9 +33,9 @@ Sort formulas and shortcuts by default order, most used, or alphabetically — p
 
 ## Installation
 
-1. Download `manifest.xml` from this repository
+1. Download `manifest.xml` from this repository and save it to a folder on your computer (e.g. `C:\Users\you\Desktop\EZXL`)
 2. In Excel go to **File → Options → Trust Center → Trust Center Settings → Trusted Add-in Catalogs**
-3. Add the catalog URL: `https://ethansnider111.github.io/ezxl/`
+3. In the catalog address box enter the path to your folder (e.g. `\\localhost\C$\Users\you\Desktop\EZXL`)
 4. Check **Show in Menu** and click OK
 5. Restart Excel
 6. Go to **Insert → Add-ins → Shared Folder** — EZXL will appear
