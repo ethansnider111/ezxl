@@ -7,7 +7,7 @@
 <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;600;700;800&display=swap');
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;word-break:normal;overflow-wrap:break-word}
 
 /* ── THEMES ── */
 :root,
@@ -65,6 +65,25 @@
   --acc:#2563eb;--acc-dim:#1d4ed8;--acc-bg:#eff6ff;--acc-text:#1e3a8a;
   --hk:#ea580c;--hk-bg:#fff7f0;--nv:#b45309;--nv-bg:#fef9f0;--logo-xl:#7090e0;
 }
+/* ── MULTI-COLOR THEMES ── */
+:root[data-theme="midnight-bloom"]{
+  --bg:#0e0c1a;--surface:#16122a;--surface2:#1e1838;
+  --border:#2a2248;--border2:#352c58;--text:#ede8ff;--muted:#7a6fa0;--faint:#120f22;
+  --acc:#a855f7;--acc-dim:#7c3aed;--acc-bg:#140e24;--acc-text:#e9d5ff;
+  --hk:#f59e0b;--hk-bg:#1c1404;--nv:#06b6d4;--nv-bg:#041418;--logo-xl:#c084fc;
+}
+:root[data-theme="ember-slate"]{
+  --bg:#111318;--surface:#1a1e26;--surface2:#222836;
+  --border:#2a3040;--border2:#333d50;--text:#f0ece0;--muted:#7a7e8a;--faint:#141720;
+  --acc:#f59e0b;--acc-dim:#d97706;--acc-bg:#1a1404;--acc-text:#1a1200;
+  --hk:#f87171;--hk-bg:#1c0a0a;--nv:#34d399;--nv-bg:#041410;--logo-xl:#fbbf24;
+}
+:root[data-theme="aurora"]{
+  --bg:#070e0e;--surface:#0c1616;--surface2:#101e1e;
+  --border:#162a2a;--border2:#1e3636;--text:#e0f4f4;--muted:#4a7878;--faint:#090f10;
+  --acc:#2dd4bf;--acc-dim:#0d9488;--acc-bg:#061212;--acc-text:#0d3330;
+  --hk:#f472b6;--hk-bg:#1c0814;--nv:#818cf8;--nv-bg:#0c0e1c;--logo-xl:#5eead4;
+}
 html,body{height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:14px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;display:flex;flex-direction:column;height:100%}
 
@@ -90,19 +109,20 @@ header{
 
 /* ── TABS ── */
 .tabs-row{display:flex;flex-shrink:0;border-bottom:1px solid var(--border)}
-.search-icon-btn{
-  background:var(--surface);border:none;border-right:1px solid var(--border);
-  padding:7px 11px;cursor:pointer;transition:all .15s;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
+.bar-search-btn{
+  background:none;border:1px solid var(--border2);border-radius:4px;
+  padding:5px 8px;cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);
 }
-.search-icon-btn svg{stroke:var(--muted);transition:stroke .15s}
-.search-icon-btn:hover svg{stroke:var(--text)}
-.search-icon-btn.active{background:var(--faint);border-bottom:2px solid var(--text)}
-.search-icon-btn.active svg{stroke:var(--text)}
+.bar-search-btn svg{stroke:var(--muted);transition:stroke .15s}
+.bar-search-btn:hover{border-color:var(--muted);color:var(--text)}
+.bar-search-btn:hover svg{stroke:var(--text)}
+.bar-search-btn.active{background:var(--acc-bg);border-color:var(--acc);color:var(--acc)}
+.bar-search-btn.active svg{stroke:var(--acc)}
 .tabs{display:grid;grid-template-columns:repeat(3,1fr);flex:1}
 .tab{
   background:var(--surface);border:none;border-right:1px solid var(--border);
-  padding:7px 3px;font-family:inherit;font-size:9px;font-weight:700;
+  padding:12px 3px;font-family:inherit;font-size:12px;font-weight:700;
   color:var(--muted);cursor:pointer;transition:all .15s;text-align:center;
   letter-spacing:0.03em;
 }
@@ -138,54 +158,55 @@ header{
 /* ── FORMULA CARDS ── */
 .fcard{background:var(--surface);border:1px solid var(--border);border-radius:6px;margin-bottom:5px;overflow:hidden;transition:border-color .12s}
 .fcard.open{border-color:var(--acc)}
-.fcard-head{padding:8px 10px;display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none;transition:background .12s}
-.fcard-head:hover{background:var(--faint)}
+.fcard-head{padding:10px 12px;display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none;transition:background .12s}
+.fcard-head:hover{background:var(--surface2)}
 .fcard-name{font-weight:700;font-size:14px;color:var(--text);flex:1}
 .fcard-desc{font-size:11px;color:var(--muted);line-height:1.4;margin-top:1px}
 .fcard-arrow{font-size:12px;color:var(--muted);transition:transform .15s;flex-shrink:0}
 .fcard.open .fcard-arrow{transform:rotate(90deg);color:var(--acc)}
 .fcard-body{display:none;padding:0 10px 10px;border-top:1px solid var(--border);background:var(--acc-bg)}
 .fcard.open .fcard-body{display:block}
-.syntax-line{font-size:11px;color:var(--acc-dim);padding:6px 0 8px;line-height:1.5;word-break:break-all;font-style:italic}
+.syntax-line{font-size:11px;color:var(--acc-dim);padding:6px 0 8px;line-height:1.5;word-break:normal;overflow-wrap:break-word;font-style:italic}
 
 /* ── INPUTS ── */
 .input-row{margin-bottom:5px}
 .input-label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
-.input-label{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:0.06em}
+.input-label{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:0.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:85%}
 .input-actions{display:flex;gap:3px;align-items:center}
 .input-with-chain{display:flex;gap:4px;align-items:center}
 .btn-chain{
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:4px;color:var(--muted);font-size:11px;
-  cursor:pointer;padding:4px 7px;transition:all .15s;
-  flex-shrink:0;line-height:1;
+  background:var(--surface2);border:1.5px solid var(--border2);
+  border-radius:4px;color:var(--text);font-size:13px;
+  cursor:pointer;padding:5px 8px;transition:all .15s;
+  flex-shrink:0;line-height:1;font-weight:700;
 }
-.btn-chain:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-bg)}
-.btn-chain.active{border-color:var(--acc);color:var(--acc);background:var(--acc-bg)}
+.btn-chain:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-bg);box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.btn-chain.active{border-color:var(--acc);color:var(--acc);background:var(--acc-bg);box-shadow:0 0 0 2px var(--acc)}
 .btn-remove{background:none;border:none;color:var(--muted);font-size:10px;cursor:pointer;padding:0 2px;transition:color .12s}
 .btn-remove:hover{color:#f87171}
 .input-field{
-  background:var(--faint);border:1px solid var(--border2);
+  background:var(--faint);border:1.5px solid var(--border2);
   border-radius:4px;padding:8px 10px;color:var(--text);
   font-family:inherit;font-size:13px;outline:none;
-  transition:border-color .15s;width:100%;
+  transition:border-color .15s,box-shadow .15s;width:100%;
 }
-.input-field:focus{border-color:var(--acc)}
+.input-field:focus{border-color:var(--acc);box-shadow:0 0 0 2px color-mix(in srgb,var(--acc) 18%,transparent)}
 .input-field::placeholder{color:var(--muted);opacity:0.45}
+.input-btn-stack{display:flex;flex-direction:column;gap:5px;flex-shrink:0;width:28px}
 .btn-pick{
-  background:none;border:1px solid var(--border2);border-radius:3px;
-  cursor:pointer;padding:0 5px;color:var(--muted);font-size:10px;
-  transition:all .12s;flex-shrink:0;height:100%;display:flex;align-items:center;
+  background:var(--surface2);border:1.5px solid var(--border2);border-radius:4px;
+  cursor:pointer;padding:0;color:var(--muted);font-size:13px;
+  transition:all .15s;flex-shrink:0;flex:1;display:flex;align-items:center;justify-content:center;
 }
-.btn-pick:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-bg)}
-.btn-pick.picking{border-color:var(--acc);color:var(--acc);background:var(--acc-bg)}
+.btn-pick:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-bg);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.btn-pick.picking{border-color:var(--acc);color:var(--acc);background:var(--acc-bg);box-shadow:0 0 0 2px var(--acc)}
 /* inline pick confirm row */
 .pick-confirm-row{
   display:none;margin-top:4px;align-items:center;gap:6px;
-  background:var(--acc-bg);border:1px solid var(--acc);border-radius:4px;padding:5px 8px;
+  background:var(--bg);border:1.5px solid var(--border2);border-radius:4px;padding:5px 8px;
 }
 .pick-confirm-row.show{display:flex}
-.pick-confirm-msg{flex:1;font-size:11px;color:var(--acc-dim);font-weight:700}
+.pick-confirm-msg{flex:1;font-size:11px;color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pick-confirm-btn{
   background:var(--acc);border:none;border-radius:3px;
   padding:6px 10px;font-family:inherit;font-size:11px;font-weight:800;
@@ -195,25 +216,28 @@ header{
   background:none;border:none;color:var(--muted);font-size:11px;cursor:pointer;padding:0 2px;flex-shrink:0;
 }
 .pick-cancel-btn:hover{color:var(--text)}
-/* input-row position:relative for X positioning */
-.input-row{position:relative;margin-bottom:7px}
+.input-field.opt{border-style:dashed;opacity:.8}
+.input-field.chained{border-color:var(--acc);background:var(--acc-bg);color:var(--acc-dim)}
 .btn-remove{
-  position:absolute;right:32px;top:-8px;
-  background:none;border:none;
-  color:var(--muted);font-size:11px;cursor:pointer;
-  line-height:1;transition:color .12s;z-index:2;padding:2px 3px;
+  background:var(--surface2);
+  border:1.5px solid var(--border2);
+  border-radius:4px;color:var(--muted);font-size:14px;cursor:pointer;
+  font-weight:800;font-family:inherit;
+  line-height:1;transition:all .15s;padding:0;flex:1;
+  display:flex;align-items:center;justify-content:center;
 }
-.btn-remove:hover{color:#f87171;}
+.btn-remove:hover{background:var(--border2);border-color:var(--text);color:var(--text);}
 
 .input-field.opt{border-style:dashed;opacity:.8}
 .input-field.chained{border-color:var(--acc);background:var(--acc-bg);color:var(--acc-dim)}
 .add-more-btn{
-  background:none;border:1px dashed var(--border2);
-  border-radius:4px;padding:4px;width:100%;
-  color:var(--muted);font-family:inherit;font-size:9px;
-  cursor:pointer;transition:all .12s;margin-top:2px;
+  background:var(--surface2);border:1.5px dashed var(--border2);
+  border-radius:4px;padding:7px;width:100%;
+  color:var(--muted);font-family:inherit;font-size:12px;font-weight:700;
+  cursor:pointer;transition:all .15s;margin-top:2px;
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
 }
-.add-more-btn:hover{border-color:var(--acc);color:var(--acc)}
+.add-more-btn:hover{border-color:var(--acc);color:var(--acc);background:var(--acc-bg);box-shadow:0 2px 5px rgba(0,0,0,.15)}
 
 /* ── CHAIN BANNER ── */
 #chain-banner{
@@ -237,7 +261,7 @@ header{
   background:transparent;border:none;border-top:1px solid var(--border2);
   padding:7px 2px;font-size:11px;
   color:var(--acc-dim);margin-bottom:8px;min-height:24px;
-  word-break:break-all;line-height:1.5;font-weight:600;
+  word-break:normal;overflow-wrap:break-word;line-height:1.5;font-weight:600;
   user-select:text;
 }
 .preview.empty{color:var(--muted);font-weight:400;font-style:italic;font-size:11px;letter-spacing:0.04em}
@@ -341,11 +365,10 @@ header{
 
 /* ── ACTIONS SLIDE PANEL ── */
 .actions-trigger{
-  background:var(--surface2);border:1px solid var(--border);border-radius:4px;
-  cursor:pointer;padding:6px 12px;font-family:inherit;font-size:10px;
-  font-weight:800;color:var(--text);letter-spacing:0.08em;
-  transition:border-color .15s,background .15s;flex-shrink:0;
-  -webkit-font-smoothing:antialiased;transform:translateZ(0);
+  background:none;border:1px solid var(--border);border-radius:4px;
+  cursor:pointer;padding:5px 7px;
+  transition:all .15s;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  color:var(--text);
 }
 .actions-trigger:hover{border-color:var(--text);background:var(--faint)}
 .actions-trigger.active{border-color:var(--acc);color:var(--acc)}
@@ -364,11 +387,10 @@ header{
 #actions-panel.open{transform:translate3d(0,0,0)}
 /* ── TOOLS PANEL ── */
 .tools-trigger{
-  background:var(--surface2);border:1px solid var(--border);border-radius:4px;
-  cursor:pointer;padding:6px 12px;font-family:inherit;font-size:10px;
-  font-weight:800;color:var(--text);letter-spacing:0.08em;
-  transition:border-color .15s,background .15s;flex-shrink:0;
-  -webkit-font-smoothing:antialiased;transform:translateZ(0);
+  background:none;border:1px solid var(--border);border-radius:4px;
+  cursor:pointer;padding:5px 7px;
+  transition:all .15s;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  color:var(--text);
 }
 .tools-trigger:hover{border-color:var(--text);background:var(--faint)}
 .tools-trigger.active{border-color:var(--acc);color:var(--acc)}
@@ -384,8 +406,8 @@ header{
   will-change:transform;-webkit-backface-visibility:hidden;backface-visibility:hidden;
 }
 #tools-panel.open{transform:translate3d(0,0,0)}
-.tools-panel-handle{width:40px;height:5px;background:var(--border2);border-radius:3px;margin:10px auto 14px;cursor:grab;transition:background .15s;}
-.tools-panel-handle:hover{background:var(--muted)}
+.tools-panel-handle{width:40px;height:5px;background:var(--border2);border-radius:3px;margin:0 auto;cursor:grab;transition:background .15s;padding:10px 30px;background-clip:content-box;}
+.tools-panel-handle:hover{background:var(--muted);background-clip:content-box}
 .tools-panel-title{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--acc);margin-bottom:12px;opacity:.8;}
 .tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .tool-tile{
@@ -399,9 +421,10 @@ header{
 .tool-tile-key{font-size:11px;color:var(--muted)}
 .actions-panel-handle{
   width:40px;height:5px;background:var(--border2);
-  border-radius:3px;margin:10px auto 14px;cursor:grab;transition:background .15s;
+  border-radius:3px;margin:0 auto;cursor:grab;transition:background .15s;
+  padding:10px 30px;background-clip:content-box;
 }
-.actions-panel-handle:hover{background:var(--muted)}
+.actions-panel-handle:hover{background:var(--muted);background-clip:content-box}
 .actions-panel-title{
   font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--acc);
   margin-bottom:10px;opacity:.8;
@@ -431,8 +454,8 @@ header{
 .action-tile-icon{font-size:18px;opacity:.7}
 .action-tile-name{font-size:11px;font-weight:700;color:var(--text)}
 .action-tile-key{font-size:11px;color:var(--muted)}
-#actions-overlay{display:none}
-#actions-overlay.show{display:none}
+#actions-overlay,#tools-overlay{display:none;position:fixed;inset:0;z-index:99;background:transparent;}
+#actions-overlay.show,#tools-overlay.show{display:block}
 
 /* ── SETTINGS BTN in header ── */
 .settings-btn{
@@ -459,15 +482,16 @@ header{
 #settings-panel.open{transform:translate3d(0,0,0)}
 .settings-panel-handle{
   width:40px;height:5px;background:var(--border2);
-  border-radius:3px;margin:10px auto 14px;cursor:grab;transition:background .15s;
+  border-radius:3px;margin:0 auto;cursor:grab;transition:background .15s;
+  padding:10px 30px;background-clip:content-box;
 }
-.settings-panel-handle:hover{background:var(--muted)}
+.settings-panel-handle:hover{background:var(--muted);background-clip:content-box}
 .settings-panel-title{
   font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--acc);
   margin-bottom:12px;opacity:.8;
 }
-#settings-overlay{display:none}
-#settings-overlay.show{display:none}
+#settings-overlay{display:none;position:fixed;inset:0;z-index:99;background:transparent;}
+#settings-overlay.show{display:block}
 .settings-section{margin-bottom:18px}
 .settings-section-title{
   font-size:11px;font-weight:800;letter-spacing:0.14em;color:var(--muted);
@@ -534,6 +558,9 @@ header{
   padding:6px 8px;border-top:1px solid;text-align:center;
 }
 
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.panel-close-btn{background:none;border:1px solid var(--border2);border-radius:4px;color:var(--muted);font-size:14px;cursor:pointer;padding:2px 9px;line-height:1.5;transition:all .15s;font-family:inherit}
+.panel-close-btn:hover{border-color:var(--text);color:var(--text);background:var(--faint)}
 #toast{
   position:fixed;bottom:12px;left:50%;
   transform:translateX(-50%) translateY(20px);
@@ -556,11 +583,50 @@ header{
 [data-nodesc="1"] .acard-desc{display:none}
 
 .empty-msg{color:var(--muted);text-align:center;padding:28px 16px;font-size:13px}
-/* ── SORT BAR ── */
+/* ── FILTER BAR ── */
+.bar-label{font-size:10px;font-weight:800;letter-spacing:0.1em;color:var(--muted);opacity:.6;white-space:nowrap}
+.bar-group{display:flex;align-items:center;gap:6px;position:relative}
+.filter-toggle-btn{
+  background:none;border:1px solid var(--border2);border-radius:4px;
+  padding:5px 10px;font-family:inherit;font-size:11px;font-weight:700;color:var(--muted);
+  cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:5px;
+}
+.filter-toggle-btn:hover{color:var(--text);border-color:var(--muted)}
+.filter-toggle-btn.active{background:var(--acc-bg);border-color:var(--acc);color:var(--acc-dim)}
+.filter-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--acc);color:var(--acc-text);border-radius:8px;
+  font-size:9px;font-weight:800;padding:1px 5px;min-width:16px;line-height:1.4;
+}
+.filter-popover{
+  display:none;position:absolute;top:calc(100% + 4px);right:0;z-index:51;
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  box-shadow:0 4px 16px rgba(0,0,0,.3);min-width:280px;overflow:hidden;
+}
+.filter-popover.show{display:block}
+.filter-pop-section{padding:8px 12px 6px;border-bottom:1px solid var(--border)}
+.filter-pop-section:last-child{border-bottom:none}
+.filter-pop-title{font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--muted);margin-bottom:6px;opacity:.7}
+.filter-chips{display:flex;flex-wrap:nowrap;gap:5px;overflow-x:auto}
+.filter-chips::-webkit-scrollbar{display:none}
+.filter-chip{
+  background:var(--surface2);border:1px solid var(--border2);border-radius:12px;
+  padding:4px 10px;font-family:inherit;font-size:11px;font-weight:700;
+  color:var(--muted);cursor:pointer;transition:all .12s;white-space:nowrap;flex:1;text-align:center;
+}
+.filter-chip:hover{border-color:var(--muted);color:var(--text)}
+.filter-chip.on{background:var(--acc-bg);border-color:var(--acc);color:var(--acc-dim)}
+.filter-pop-clear{
+  width:100%;background:none;border:none;border-top:1px solid var(--border);
+  padding:8px 12px;font-family:inherit;font-size:11px;font-weight:700;
+  color:var(--muted);cursor:pointer;text-align:left;transition:color .12s;
+}
+.filter-pop-clear:hover{color:var(--text)}
+
 .sort-bar{
   display:flex;align-items:center;justify-content:flex-end;padding:5px 10px;
   border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0;
-  position:relative;
+  position:relative;gap:8px;
 }
 .sort-toggle-btn{
   background:none;border:1px solid var(--border2);border-radius:4px;
@@ -570,7 +636,7 @@ header{
 .sort-toggle-btn:hover{color:var(--text);border-color:var(--muted)}
 .sort-toggle-btn.active{background:var(--acc-bg);border-color:var(--acc);color:var(--acc-dim)}
 .sort-popover{
-  display:none;position:absolute;top:calc(100% + 4px);right:10px;z-index:50;
+  display:none;position:absolute;top:calc(100% + 4px);right:0;z-index:50;
   background:var(--surface);border:1px solid var(--border);border-radius:8px;
   box-shadow:0 4px 16px rgba(0,0,0,.3);min-width:160px;overflow:hidden;
 }
@@ -592,21 +658,19 @@ header{
 <header>
   <div class="logo-wrap">
     <span class="logo"><span class="logo-ez">EZ</span><span class="logo-xl">XL</span></span>
-    <span class="logo-tagline">Your Excel<br>Helper</span>
+    <span class="logo-tagline">YOUR<br>EXCEL<br>HELPER</span>
   </div>
-  <button class="tools-trigger" id="toolsBtn">TOOLS</button>
-  <button class="actions-trigger" id="actionsBtn">GO TO</button>
+  <button class="tools-trigger" id="toolsBtn" title="Tools">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+  </button>
+  <button class="actions-trigger" id="actionsBtn" title="Go To">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+  </button>
   <button class="settings-btn" id="settingsBtn" title="Settings"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
   <div style="flex:0 0 24px"></div>
 </header>
 
 <div class="tabs-row">
-  <button class="search-icon-btn" id="searchIconBtn" title="Search all formulas">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="6" cy="6" r="4"/>
-      <line x1="9.5" y1="9.5" x2="13" y2="13"/>
-    </svg>
-  </button>
   <div class="tabs" id="tabs">
     <button class="tab a-Numbers"  data-cat="Numbers">∑ Numbers</button>
     <button class="tab"            data-cat="LookupText">⇄ Find</button>
@@ -620,25 +684,26 @@ header{
 
 <div id="chain-banner">
   <div class="chain-banner-top">
-    <span class="chain-banner-msg">⛓ Now click a formula to link it in</span>
+    <span class="chain-banner-msg">🔗 Now click a formula to link it in</span>
     <button class="chain-banner-cancel" id="chainCancelBtn">✕ Stop</button>
   </div>
   <div class="chain-banner-target" id="chainBannerTarget"></div>
 </div>
 
 <div id="settings-overlay"></div>
-<div id="settings-panel"><div class="settings-panel-handle"></div><div class="settings-panel-title">⚙ SETTINGS</div><div id="settings-content"></div></div>
+<div id="settings-panel"><div class="settings-panel-handle"></div><div class="panel-header"><div class="settings-panel-title" style="margin-bottom:0">SETTINGS</div><button class="panel-close-btn" id="settingsCloseBtn">✕</button></div><div id="settings-content"></div></div>
+<div id="tools-overlay"></div>
 <div id="tools-panel">
   <div class="tools-panel-handle"></div>
-  <div class="tools-panel-title">🛠 TOOLS</div>
+  <div class="panel-header"><div class="tools-panel-title" style="margin-bottom:0">TOOLS</div><button class="panel-close-btn" id="toolsCloseBtn">✕</button></div>
   <div class="tools-grid" id="toolsGrid"></div>
 </div>
 <div id="list"></div>
 <div id="actions-overlay"></div>
 <div id="actions-panel">
   <div class="actions-panel-handle"></div>
-  <div class="actions-panel-title">⚡ GO TO</div>
-  <div class="actions-panel-jump">
+  <div class="panel-header"><div class="actions-panel-title" style="margin-bottom:0">GO TO</div><button class="panel-close-btn" id="actionsCloseBtn">✕</button></div>
+  <div class="actions-panel-jump" id="jumpRow" style="display:none">
     <input id="jumpInput" type="text" placeholder="Type a cell, like A1 or B42…" autocomplete="off"/>
     <button id="jumpBtn">Go</button>
   </div>
@@ -1226,6 +1291,172 @@ const NAVIGATION = [
 // Combined arrays for the new merged tabs
 const ACTIONS   = [...HOTKEYS,...NAVIGATION].filter(x=>x.executable&&x.action);
 const SHORTCUTS = [...HOTKEYS,...NAVIGATION].filter(x=>!(x.executable&&x.action));
+
+// ── FORMULA METADATA (category + complexity) ──────────────
+const FORMULA_META = {
+  // Numbers tab — Basic (17)
+  "SUM":              {cat:"Math",  complexity:"Basic"},
+  "AVERAGE":          {cat:"Math",  complexity:"Basic"},
+  "MIN":              {cat:"Math",  complexity:"Basic"},
+  "MAX":              {cat:"Math",  complexity:"Basic"},
+  "COUNT":            {cat:"Math",  complexity:"Basic"},
+  "COUNTA":           {cat:"Math",  complexity:"Basic"},
+  "ROUND":            {cat:"Math",  complexity:"Basic"},
+  "ABS":              {cat:"Math",  complexity:"Basic"},
+  "PRODUCT":          {cat:"Math",  complexity:"Basic"},
+  "SQRT":             {cat:"Math",  complexity:"Basic"},
+  "IF":               {cat:"Logic", complexity:"Basic"},
+  "IFERROR":          {cat:"Logic", complexity:"Basic"},
+  "AND":              {cat:"Logic", complexity:"Basic"},
+  "OR":               {cat:"Logic", complexity:"Basic"},
+  "TODAY":            {cat:"Date",  complexity:"Basic"},
+  "NOW":              {cat:"Date",  complexity:"Basic"},
+  "DATE":             {cat:"Date",  complexity:"Basic"},
+  // Numbers tab — Intermediate (17)
+  "COUNTBLANK":       {cat:"Math",  complexity:"Intermediate"},
+  "COUNTIF":          {cat:"Math",  complexity:"Intermediate"},
+  "SUMIF":            {cat:"Math",  complexity:"Intermediate"},
+  "AVERAGEIF":        {cat:"Math",  complexity:"Intermediate"},
+  "ROUNDUP":          {cat:"Math",  complexity:"Intermediate"},
+  "ROUNDDOWN":        {cat:"Math",  complexity:"Intermediate"},
+  "INT":              {cat:"Math",  complexity:"Intermediate"},
+  "MOD":              {cat:"Math",  complexity:"Intermediate"},
+  "TRUNC":            {cat:"Math",  complexity:"Intermediate"},
+  "POWER":            {cat:"Math",  complexity:"Intermediate"},
+  "RAND":             {cat:"Math",  complexity:"Intermediate"},
+  "RANDBETWEEN":      {cat:"Math",  complexity:"Intermediate"},
+  "NOT":              {cat:"Logic", complexity:"Intermediate"},
+  "IFS":              {cat:"Logic", complexity:"Intermediate"},
+  "YEAR / MONTH / DAY":{cat:"Date", complexity:"Intermediate"},
+  "HOUR / MINUTE / SECOND":{cat:"Date",complexity:"Intermediate"},
+  "TIME":             {cat:"Date",  complexity:"Intermediate"},
+  // Numbers tab — Advanced (16)
+  "COUNTIFS":         {cat:"Math",  complexity:"Advanced"},
+  "SUMIFS":           {cat:"Math",  complexity:"Advanced"},
+  "LARGE":            {cat:"Math",  complexity:"Advanced"},
+  "SMALL":            {cat:"Math",  complexity:"Advanced"},
+  "RANK":             {cat:"Math",  complexity:"Advanced"},
+  "CEILING":          {cat:"Math",  complexity:"Advanced"},
+  "FLOOR":            {cat:"Math",  complexity:"Advanced"},
+  "MEDIAN":           {cat:"Math",  complexity:"Advanced"},
+  "MODE":             {cat:"Math",  complexity:"Advanced"},
+  "STDEV":            {cat:"Math",  complexity:"Advanced"},
+  "SUMPRODUCT":       {cat:"Math",  complexity:"Advanced"},
+  "DATEDIF":          {cat:"Date",  complexity:"Advanced"},
+  "NETWORKDAYS":      {cat:"Date",  complexity:"Advanced"},
+  "WORKDAY":          {cat:"Date",  complexity:"Advanced"},
+  "EDATE":            {cat:"Date",  complexity:"Advanced"},
+  "EOMONTH":          {cat:"Date",  complexity:"Advanced"},
+  // LookupText tab — Basic (13)
+  "TEXT":             {cat:"Text",  complexity:"Basic"},
+  "VALUE":            {cat:"Text",  complexity:"Basic"},
+  "CONCAT / &":       {cat:"Text",  complexity:"Basic"},
+  "LEFT / RIGHT / MID":{cat:"Text", complexity:"Basic"},
+  "LEN":              {cat:"Text",  complexity:"Basic"},
+  "TRIM":             {cat:"Text",  complexity:"Basic"},
+  "UPPER / LOWER / PROPER":{cat:"Text",complexity:"Basic"},
+  "ISBLANK":          {cat:"Logic", complexity:"Basic"},
+  "ISNUMBER":         {cat:"Logic", complexity:"Basic"},
+  "ISTEXT":           {cat:"Logic", complexity:"Basic"},
+  "ISERROR":          {cat:"Logic", complexity:"Basic"},
+  "ISNA":             {cat:"Logic", complexity:"Basic"},
+  "CHOOSE":           {cat:"Lookup",complexity:"Basic"},
+  // LookupText tab — Intermediate (14)
+  "VLOOKUP":          {cat:"Lookup",complexity:"Intermediate"},
+  "XLOOKUP":          {cat:"Lookup",complexity:"Intermediate"},
+  "MATCH":            {cat:"Lookup",complexity:"Intermediate"},
+  "INDEX":            {cat:"Lookup",complexity:"Intermediate"},
+  "ROWS":             {cat:"Lookup",complexity:"Intermediate"},
+  "COLUMNS":          {cat:"Lookup",complexity:"Intermediate"},
+  "HYPERLINK":        {cat:"Text",  complexity:"Intermediate"},
+  "REPT":             {cat:"Text",  complexity:"Intermediate"},
+  "EXACT":            {cat:"Text",  complexity:"Intermediate"},
+  "CHAR":             {cat:"Text",  complexity:"Intermediate"},
+  "CODE":             {cat:"Text",  complexity:"Intermediate"},
+  "SUBSTITUTE":       {cat:"Text",  complexity:"Intermediate"},
+  "FIND / SEARCH":    {cat:"Text",  complexity:"Intermediate"},
+  "NUMBERVALUE":      {cat:"Text",  complexity:"Intermediate"},
+  // LookupText tab — Advanced (13)
+  "INDEX / MATCH":    {cat:"Lookup",complexity:"Advanced"},
+  "OFFSET":           {cat:"Lookup",complexity:"Advanced"},
+  "INDIRECT":         {cat:"Lookup",complexity:"Advanced"},
+  "UNIQUE":           {cat:"Lookup",complexity:"Advanced"},
+  "FILTER":           {cat:"Lookup",complexity:"Advanced"},
+  "SORT":             {cat:"Lookup",complexity:"Advanced"},
+  "SORTBY":           {cat:"Lookup",complexity:"Advanced"},
+  "SEQUENCE":         {cat:"Lookup",complexity:"Advanced"},
+  "TRANSPOSE":        {cat:"Lookup",complexity:"Advanced"},
+  "ADDRESS":          {cat:"Lookup",complexity:"Advanced"},
+  "TEXTJOIN":         {cat:"Text",  complexity:"Advanced"},
+  "LET":              {cat:"Logic", complexity:"Advanced"},
+  "LAMBDA":           {cat:"Logic", complexity:"Advanced"},
+};
+
+// ── SHORTCUT METADATA (type + actionType) ─────────────────
+const SHORTCUT_META = {
+  "Cut":            {type:"Editing",    actionType:"Reference"},
+  "Copy":           {type:"Editing",    actionType:"Reference"},
+  "Paste":          {type:"Editing",    actionType:"Reference"},
+  "Paste Special":  {type:"Editing",    actionType:"Reference"},
+  "Undo":           {type:"Editing",    actionType:"Reference"},
+  "Redo":           {type:"Editing",    actionType:"Reference"},
+  "Save":           {type:"Editing",    actionType:"Reference"},
+  "Find":           {type:"Editing",    actionType:"Reference"},
+  "Find & Replace": {type:"Editing",    actionType:"Reference"},
+  "Edit Cell":      {type:"Editing",    actionType:"Reference"},
+  "Absolute Ref":   {type:"Editing",    actionType:"Reference"},
+  "Fill Selection": {type:"Editing",    actionType:"Reference"},
+  "Fill Down":      {type:"Editing",    actionType:"Reference"},
+  "Fill Right":     {type:"Editing",    actionType:"Reference"},
+  "Line Break":     {type:"Editing",    actionType:"Reference"},
+  "AutoFilter":     {type:"Editing",    actionType:"Executable"},
+  "Create Table":   {type:"Editing",    actionType:"Reference"},
+  "Insert Row/Col": {type:"Editing",    actionType:"Reference"},
+  "Delete Row/Col": {type:"Editing",    actionType:"Reference"},
+  "Jump to Edge":   {type:"Navigation", actionType:"Reference"},
+  "Go to A1":       {type:"Navigation", actionType:"Executable"},
+  "Last Used Cell": {type:"Navigation", actionType:"Executable"},
+  "Previous Sheet": {type:"Navigation", actionType:"Reference"},
+  "Next Sheet":     {type:"Navigation", actionType:"Reference"},
+  "Extend Selection":{type:"Selection", actionType:"Reference"},
+  "Select All Data":{type:"Selection",  actionType:"Executable"},
+};
+
+// ── FILTER DIMENSIONS PER TAB ──────────────────────────────
+const FILTER_DIMS = {
+  Numbers:    [{key:"cat",       label:"Category",   opts:["Math","Date","Logic"]},
+               {key:"complexity",label:"Complexity",  opts:["Basic","Intermediate","Advanced"]}],
+  LookupText: [{key:"cat",       label:"Category",   opts:["Lookup","Text","Logic"]},
+               {key:"complexity",label:"Complexity",  opts:["Basic","Intermediate","Advanced"]}],
+  Keys:       [{key:"type",      label:"Type",        opts:["Editing","Navigation","Selection"]}],
+};
+
+// filterState per tab
+const filterState = {
+  Numbers:{cat:new Set(),complexity:new Set()},
+  LookupText:{cat:new Set(),complexity:new Set()},
+  Keys:{type:new Set()},
+};
+
+function getActiveFilterCount(tabCat){
+  const fs=filterState[tabCat];
+  if(!fs)return 0;
+  return Object.values(fs).reduce((sum,s)=>sum+s.size,0);
+}
+
+function applyFilters(items, tabCat){
+  const fs=filterState[tabCat];
+  if(!fs)return items;
+  const dims=FILTER_DIMS[tabCat]||[];
+  return items.filter(item=>{
+    const meta=(tabCat==="Keys"?SHORTCUT_META:FORMULA_META)[item.name]||{};
+    return dims.every(dim=>{
+      const active=fs[dim.key];
+      if(!active||active.size===0)return true;
+      return active.has(meta[dim.key]);
+    });
+  });
+}
 // ═══════════════════════════════════════════════════════
 function req(s,...keys){return keys.every(k=>s[k])}
 function vv(state,key){
@@ -1347,8 +1578,6 @@ function render(){
 
 function renderToolbar(){
   const toolbar=document.getElementById("toolbar");
-  const sib=document.getElementById("searchIconBtn");
-  if(sib) sib.classList.toggle("active",searchOpen);
 
   if(searchOpen){
     toolbar.innerHTML=`<input id="toolbarInput" type="text" placeholder="Search everything…" autocomplete="off"/>`;
@@ -1382,39 +1611,105 @@ function renderSortBar(){
   }
   if(searchOpen){bar.style.display="none";return;}
   bar.style.display="flex";
+
   const ss=sortState[cat]||{mode:"default",dir:1};
   const modeLabel={default:"Default",used:"Most Used",alpha:"A–Z"}[ss.mode]||"Sort";
   const dirLabel=ss.dir===1?"↓":"↑";
   const isNonDefault=ss.mode!=="default"||ss.dir===-1;
-  bar.innerHTML=`<button class="sort-toggle-btn${isNonDefault?" active":""}" id="sortToggleBtn">⇅ ${modeLabel} ${dirLabel}</button>
-    <div class="sort-popover" id="sortPopover">
-      ${[{id:"default",label:"Default"},{id:"used",label:"Most Used"},{id:"alpha",label:"A–Z"}]
-        .map(m=>`<div class="sort-pop-item${ss.mode===m.id?" active":""}" data-sort="${m.id}">
-          <span>${m.label}</span>
-          <span class="sort-pop-dir">${ss.mode===m.id?dirLabel:""}</span>
-        </div>`).join("")}
+  const filterCount=getActiveFilterCount(cat);
+
+  bar.innerHTML=`
+    <div class="bar-group">
+      <button class="bar-search-btn${searchOpen?" active":""}" id="barSearchBtn" title="Search">
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="4"/><line x1="9.5" y1="9.5" x2="13" y2="13"/></svg>
+      </button>
+    </div>
+    <div class="bar-group">
+      <span class="bar-label">SORT</span>
+      <button class="sort-toggle-btn${isNonDefault?" active":""}" id="sortToggleBtn">⇅ ${modeLabel} ${dirLabel}</button>
+      <div class="sort-popover" id="sortPopover">
+        ${[{id:"default",label:"Default"},{id:"used",label:"Most Used"},{id:"alpha",label:"A–Z"}]
+          .map(m=>`<div class="sort-pop-item${ss.mode===m.id?" active":""}" data-sort="${m.id}">
+            <span>${m.label}</span>
+            <span class="sort-pop-dir">${ss.mode===m.id?dirLabel:""}</span>
+          </div>`).join("")}
+      </div>
+    </div>
+    <div class="bar-group">
+      <span class="bar-label">FILTER</span>
+      <button class="filter-toggle-btn${filterCount>0?" active":""}" id="filterToggleBtn">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:3px"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>Filter ${filterCount>0?`<span class="filter-badge">${filterCount}</span>`:""}
+      </button>
+      <div class="filter-popover" id="filterPopover">
+        ${(FILTER_DIMS[cat]||[]).map(dim=>`
+          <div class="filter-pop-section">
+            <div class="filter-pop-title">${dim.label.toUpperCase()}</div>
+            <div class="filter-chips">
+              ${dim.opts.map(opt=>`<button class="filter-chip${(filterState[cat][dim.key]||new Set()).has(opt)?" on":""}" data-dim="${dim.key}" data-val="${opt}">${opt}</button>`).join("")}
+            </div>
+          </div>`).join("")}
+        ${filterCount>0?`<button class="filter-pop-clear" id="filterClearBtn">✕ Clear all filters</button>`:""}
+      </div>
     </div>`;
-  const toggleBtn=bar.querySelector("#sortToggleBtn");
-  const popover=bar.querySelector("#sortPopover");
-  toggleBtn.onclick=e=>{e.stopPropagation();popover.classList.toggle("show");};
+
+  // Sort popover wiring
+  const sortBtn=bar.querySelector("#sortToggleBtn");
+  const sortPop=bar.querySelector("#sortPopover");
+  sortBtn.onclick=e=>{e.stopPropagation();filterPop.classList.remove("show");sortPop.classList.toggle("show");};
   bar.querySelectorAll(".sort-pop-item").forEach(item=>item.onclick=e=>{
     e.stopPropagation();
     const ss2=sortState[cat]||{mode:"default",dir:1};
     if(ss2.mode===item.dataset.sort){ss2.dir*=-1;}else{ss2.mode=item.dataset.sort;ss2.dir=1;}
     sortState[cat]=ss2;
-    // keep popover open — re-render it in place so user sees the change
     renderSortBar();renderList();
-    // re-open popover after re-render
     const newPop=document.getElementById("sortPopover");
     if(newPop) newPop.classList.add("show");
   });
-  // close on outside click (use capture so it fires after toggle btn click)
+
+  // Filter popover wiring
+  const filterBtn=bar.querySelector("#filterToggleBtn");
+  const filterPop=bar.querySelector("#filterPopover");
+  filterBtn.onclick=e=>{e.stopPropagation();sortPop.classList.remove("show");filterPop.classList.toggle("show");};
+  bar.querySelectorAll(".filter-chip").forEach(chip=>chip.onclick=e=>{
+    e.stopPropagation();
+    const dim=chip.dataset.dim;
+    const val=chip.dataset.val;
+    const s=filterState[cat][dim];
+    if(s.has(val))s.delete(val);else s.add(val);
+    renderSortBar();renderList();
+    const newPop=document.getElementById("filterPopover");
+    if(newPop)newPop.classList.add("show");
+  });
+  const clearBtn=bar.querySelector("#filterClearBtn");
+  if(clearBtn)clearBtn.onclick=e=>{
+    e.stopPropagation();
+    const dims=FILTER_DIMS[cat]||[];
+    dims.forEach(d=>filterState[cat][d.key].clear());
+    renderSortBar();renderList();
+  };
+
+  // Search button in sort bar
+  const barSearchBtn = bar.querySelector("#barSearchBtn");
+  if(barSearchBtn) barSearchBtn.onclick = e => {
+    e.stopPropagation();
+    searchOpen = !searchOpen;
+    if(searchOpen){ S.sq=""; openFormula=null; openShortcut=null; }
+    syncTabClasses();
+    render();
+    setTimeout(renderSortBar, 0);
+  };
+
+  // Close both on outside click
   setTimeout(()=>{
-    document.addEventListener("click",function closePop(e){
-      const pop=document.getElementById("sortPopover");
-      if(pop && !pop.contains(e.target) && !document.getElementById("sortToggleBtn")?.contains(e.target)){
-        pop.classList.remove("show");
-        document.removeEventListener("click",closePop);
+    document.addEventListener("click",function closePops(e){
+      const sp=document.getElementById("sortPopover");
+      const fp=document.getElementById("filterPopover");
+      const st=document.getElementById("sortToggleBtn");
+      const ft=document.getElementById("filterToggleBtn");
+      if(sp&&!sp.contains(e.target)&&!st?.contains(e.target))sp.classList.remove("show");
+      if(fp&&!fp.contains(e.target)&&!ft?.contains(e.target)){
+        fp.classList.remove("show");
+        document.removeEventListener("click",closePops);
       }
     });
   },0);
@@ -1435,11 +1730,15 @@ function renderList(){
   if(searchOpen){
     renderSearchAll(list, S.sq);
   } else if(cat==="Numbers"||cat==="LookupText"){
-    renderFormulas(list,applySort(F[cat],cat),S.q);
+    const sorted=applySort(F[cat],cat);
+    const filtered=applyFilters(sorted,cat);
+    renderFormulas(list,filtered,S.q);
   } else if(cat==="Keys"){
     const q=S.hq.toLowerCase();
     const filtSc=SHORTCUTS.filter(h=>!q||h.name.toLowerCase().includes(q)||h.key.toLowerCase().includes(q));
-    renderShortcuts(list,applySort(filtSc,"Keys"));
+    const sorted=applySort(filtSc,"Keys");
+    const filtered=applyFilters(sorted,"Keys");
+    renderShortcuts(list,filtered);
   }
 }
 
@@ -1479,14 +1778,10 @@ function renderSearchAll(list, query){
   if(matchedC.length){
     const lbl=document.createElement("div");
     lbl.className="action-group-label";
-    lbl.textContent="SHORTCUTS & BUTTONS";
+    lbl.textContent="SHORTCUTS";
     list.appendChild(lbl);
 
-    // actions (executable)
-    const matchedA=matchedC.filter(c=>c.executable&&c.action);
-    if(matchedA.length) renderActionsGrouped({innerHTML:"",appendChild:el=>list.appendChild(el)},matchedA,"hk");
-
-    // shortcuts (non-executable, copy on click)
+    // shortcuts only (non-executable — copy on click)
     const matchedS=matchedC.filter(c=>!(c.executable&&c.action));
     if(matchedS.length){
       const table=document.createElement("table");
@@ -1606,8 +1901,8 @@ function renderFormulas(list, formulas, query){
         updateInsertLabel();
       };
 
-      const rebuildSection=()=>{
-        saveValues();
+      const rebuildSection=(skipSave=false)=>{
+        if(!skipSave) saveValues();
         section.innerHTML=buildInputsHTML(f);
         bindSection();
         updatePreview();
@@ -1619,7 +1914,17 @@ function renderFormulas(list, formulas, query){
           const v=inputState[f.name][inp.dataset.key];
           if(v!==undefined)inp.value=v;
           if(v&&v.startsWith("="))inp.classList.add("chained");
-          inp.oninput=()=>{inp.classList.remove("chained");updatePreview();};
+          inp.oninput=()=>{
+            inp.classList.remove("chained");
+            // cancel any active cell picker when user types
+            const activePick=card.querySelector(".btn-pick.picking");
+            if(activePick){
+              const confirmRow=card.querySelector(".pick-confirm-row.show");
+              if(confirmRow)confirmRow.classList.remove("show");
+              activePick.classList.remove("picking");
+            }
+            updatePreview();
+          };
         });
         // cell picker buttons
         card.querySelectorAll(".btn-pick").forEach(btn=>{
@@ -1628,7 +1933,13 @@ function renderFormulas(list, formulas, query){
             const key=btn.dataset.key;
             const inp=card.querySelector(`.input-field[data-key="${key}"]`);
             if(!inp)return;
-            // Show the cell-confirm banner targeting this input
+            // if already picking this field, cancel
+            if(btn.classList.contains("picking")){
+              const confirmRow=card.querySelector(`.pick-confirm-row[data-pick-key="${key}"]`);
+              if(confirmRow)confirmRow.classList.remove("show");
+              btn.classList.remove("picking");
+              return;
+            }
             showPickBanner(inp, btn, updatePreview);
           };
         });
@@ -1636,15 +1947,20 @@ function renderFormulas(list, formulas, query){
         card.querySelectorAll(".add-more-btn").forEach(btn=>{
           btn.onclick=e=>{
             e.stopPropagation();
+            saveValues();
             const sk=f.name+":"+btn.dataset.vkey;
-            extraInputs[sk]=(extraInputs[sk]||0)+1;
-            rebuildSection();
+            const newIdx=(extraInputs[sk]||0)+1;
+            if(!inputState[f.name])inputState[f.name]={};
+            inputState[f.name][btn.dataset.vkey+"_"+newIdx]="";
+            extraInputs[sk]=newIdx;
+            rebuildSection(true);
           };
         });
         // remove
         card.querySelectorAll(".btn-remove").forEach(btn=>{
           btn.onclick=e=>{
             e.stopPropagation();
+            saveValues();
             const vkey=btn.dataset.vkey;
             const idx=parseInt(btn.dataset.idx);
             const sk=f.name+":"+vkey;
@@ -1654,7 +1970,7 @@ function renderFormulas(list, formulas, query){
             }
             delete inputState[f.name][vkey+"_"+count];
             if(count>0)extraInputs[sk]=count-1;
-            rebuildSection();
+            rebuildSection(true);
           };
         });
         // chain button — enter chain mode
@@ -1663,6 +1979,11 @@ function renderFormulas(list, formulas, query){
             e.stopPropagation();
             const key=btn.dataset.key;
             const label=btn.dataset.label;
+            // if already in chain mode for this exact field, cancel
+            if(chainMode && chainMode.formulaName===f.name && chainMode.key===key){
+              cancelChainMode();
+              return;
+            }
             enterChainMode(f.name, key, label);
           };
         });
@@ -1728,14 +2049,16 @@ function inputRowHTML(fname,label,key,ph,isOpt,variadicKey,idx){
     <div class="input-with-chain">
       <button class="btn-chain${isActiveChain?" active":""}" data-key="${key}" data-label="${label.replace(/"/g,"&quot;")}" title="Use another formula's result here">🔗</button>
       <input class="input-field${isOpt?" opt":""}${isChained?" chained":""}" data-key="${key}" placeholder="${ph}"/>
-      <button class="btn-pick" data-key="${key}" title="Select a cell or range in Excel">⊞</button>
+      <div class="input-btn-stack">
+        ${removable?`<button class="btn-remove" data-vkey="${variadicKey}" data-idx="${idx}">✕</button>`:""}
+        <button class="btn-pick" data-key="${key}" title="Select a cell or range in Excel">⊞</button>
+      </div>
     </div>
     <div class="pick-confirm-row" data-pick-key="${key}">
-      <span class="pick-confirm-msg">📍 Select cells in Excel, then confirm</span>
+      <span class="pick-confirm-msg">Select cells in Excel, then confirm</span>
       <button class="pick-confirm-btn" data-pick-key="${key}">✓ Use Selection</button>
       <button class="pick-cancel-btn" data-pick-key="${key}">✕</button>
     </div>
-    ${removable?`<button class="btn-remove" data-vkey="${variadicKey}" data-idx="${idx}">✕</button>`:""}
   </div>`;
 }
 
@@ -1875,6 +2198,11 @@ const THEME_GROUPS = [
     { id:"gray",        label:"Gray",        bg:"#1e1e1e", surf:"#2a2a2a", surf2:"#333",    brd:"#3a3a3a", brd2:"#444",    txt:"#e4e4e4", mut:"#707070", acc:"#aaaaaa", accTxt:"#111" },
     { id:"black",       label:"Black",       bg:"#080808", surf:"#161616", surf2:"#222",    brd:"#2a2a2a", brd2:"#333",    txt:"#f0f0f0", mut:"#505050", acc:"#d8d8d8", accTxt:"#111" },
   ]},
+  { label:"SIGNATURE", themes:[
+    { id:"midnight-bloom", label:"Midnight Bloom", bg:"#0e0c1a", surf:"#16122a", surf2:"#1e1838", brd:"#2a2248", brd2:"#352c58", txt:"#ede8ff", mut:"#7a6fa0", acc:"#a855f7", accTxt:"#e9d5ff", hk:"#f59e0b" },
+    { id:"ember-slate",    label:"Ember & Slate",  bg:"#111318", surf:"#1a1e26", surf2:"#222836", brd:"#2a3040", brd2:"#333d50", txt:"#f0ece0", mut:"#7a7e8a", acc:"#f59e0b", accTxt:"#1a1200", hk:"#f87171" },
+    { id:"aurora",         label:"Aurora",         bg:"#070e0e", surf:"#0c1616", surf2:"#101e1e", brd:"#162a2a", brd2:"#1e3636", txt:"#e0f4f4", mut:"#4a7878", acc:"#2dd4bf", accTxt:"#0d3330", hk:"#f472b6" },
+  ]},
 ];
 
 let currentTheme = "light-green";
@@ -1958,15 +2286,15 @@ function renderSettingsPage(){
       card.className = "theme-card"+(t.id===currentTheme?" selected":"");
       card.innerHTML = `
         <div class="theme-preview" style="background:${t.bg}">
-          <div class="tp-row1"><div class="tp-logo" style="background:${t.surf}"></div><div class="tp-spacer"></div><div class="tp-dot" style="background:${t.acc}"></div></div>
+          <div class="tp-row1"><div class="tp-logo" style="background:${t.surf}"></div><div class="tp-spacer" style="flex:1"></div>${t.hk?`<div class="tp-dot" style="background:${t.hk};width:7px;height:7px;border-radius:50%;margin-right:3px"></div>`:""}<div class="tp-dot" style="background:${t.acc};width:7px;height:7px;border-radius:50%"></div></div>
           <div class="tp-tabs">
             <div class="tp-tab active" style="background:${t.acc};opacity:.9"></div>
-            <div class="tp-tab inactive" style="background:${t.mut}"></div>
+            <div class="tp-dot-tab" style="${t.hk?`background:${t.hk}`:`background:${t.mut}`};height:5px;border-radius:2px 2px 0 0;width:14px;opacity:.6"></div>
             <div class="tp-tab inactive" style="background:${t.mut}"></div>
           </div>
           <div class="tp-body" style="background:${t.surf2}">
             <div class="tp-line" style="background:${t.acc};width:60%"></div>
-            <div class="tp-line short" style="background:${t.mut}"></div>
+            <div class="tp-line short" style="${t.hk?`background:${t.hk};opacity:.7`:`background:${t.mut}`}"></div>
           </div>
         </div>
         <div class="theme-card-label" style="background:${t.surf};color:${t.txt};border-color:${t.brd}">${t.label}</div>`;
@@ -2059,9 +2387,6 @@ function syncTabClasses(){
     t.className="tab"+(!searchOpen&&t.dataset.cat===cat?" a-"+cat:"");
   });
 }
-
-// ═══════════════════════════════════════════════════════
-//  ACTIONS SLIDE PANEL
 // ═══════════════════════════════════════════════════════
 let actionsOpen = false;
 
@@ -2072,6 +2397,13 @@ const ACTION_TILES = [
    action:()=>Excel.run(async c=>{const r=c.workbook.worksheets.getActiveWorksheet().getUsedRange();r.load("address");await c.sync();const last=r.address.split(":").pop().replace(/^[^!]+!/,"");c.workbook.worksheets.getActiveWorksheet().getRange(last).select();await c.sync();toast("Jumped to "+last)}).catch(()=>toast("Press Ctrl+End"))},
   {icon:"▣", name:"Select All Data", key:"Ctrl+A",     desc:"Select used range",
    action:()=>Excel.run(async c=>{c.workbook.worksheets.getActiveWorksheet().getUsedRange().select();await c.sync();toast("All your data is selected")}).catch(()=>toast("Press Ctrl+A"))},
+  {icon:"↗", name:"Go To Cell",      key:"Type address", desc:"Jump to any cell",
+   action:()=>{
+     const row=document.getElementById("jumpRow");
+     const isVisible=row.style.display!=="none";
+     row.style.display=isVisible?"none":"flex";
+     if(!isVisible){document.getElementById("jumpInput").focus();}
+   }},
 ];
 
 const TOOL_TILES = [
@@ -2086,8 +2418,8 @@ const TOOL_TILES = [
 ];
 
 function closeAllPanels(except){
-  if(except!="actions"&&actionsOpen){actionsOpen=false;document.getElementById("actions-panel").classList.remove("open");document.getElementById("actionsBtn").classList.remove("active");}
-  if(except!="tools"&&toolsOpen){toolsOpen=false;document.getElementById("tools-panel").classList.remove("open");document.getElementById("toolsBtn").classList.remove("active");}
+  if(except!="actions"&&actionsOpen){actionsOpen=false;document.getElementById("actions-panel").classList.remove("open");document.getElementById("actionsBtn").classList.remove("active");document.getElementById("actions-overlay").classList.remove("show");}
+  if(except!="tools"&&toolsOpen){toolsOpen=false;document.getElementById("tools-panel").classList.remove("open");document.getElementById("toolsBtn").classList.remove("active");document.getElementById("tools-overlay").classList.remove("show");}
   if(except!="settings"&&settingsOpen){settingsOpen=false;document.getElementById("settings-panel").classList.remove("open");document.getElementById("settings-overlay").classList.remove("show");document.getElementById("settingsBtn").classList.remove("active");}
 }
 function toggleActionsPanel(){
@@ -2095,7 +2427,13 @@ function toggleActionsPanel(){
   actionsOpen=!actionsOpen;
   document.getElementById("actions-panel").classList.toggle("open",actionsOpen);
   document.getElementById("actionsBtn").classList.toggle("active",actionsOpen);
-  if(actionsOpen) renderActionTiles();
+  document.getElementById("actions-overlay").classList.toggle("show",actionsOpen);
+  if(actionsOpen){
+    // reset jump row to hidden each time panel opens
+    const jr=document.getElementById("jumpRow");
+    if(jr) jr.style.display="none";
+    renderActionTiles();
+  }
 }
 
 let toolsOpen=false;
@@ -2104,6 +2442,7 @@ function toggleToolsPanel(){
   toolsOpen=!toolsOpen;
   document.getElementById("tools-panel").classList.toggle("open",toolsOpen);
   document.getElementById("toolsBtn").classList.toggle("active",toolsOpen);
+  document.getElementById("tools-overlay").classList.toggle("show",toolsOpen);
   if(toolsOpen) renderToolTiles();
 }
 function renderToolTiles(){
@@ -2209,6 +2548,10 @@ function makeHandleDraggable(handleEl, panelEl, closeFn){
 document.getElementById("actionsBtn").onclick=toggleActionsPanel;
 document.getElementById("toolsBtn").onclick=toggleToolsPanel;
 document.getElementById("actions-overlay").onclick=toggleActionsPanel;
+document.getElementById("tools-overlay").onclick=toggleToolsPanel;
+document.getElementById("actionsCloseBtn").onclick=toggleActionsPanel;
+document.getElementById("toolsCloseBtn").onclick=toggleToolsPanel;
+document.getElementById("settingsCloseBtn").onclick=toggleSettingsPage;
 
 // jump input in actions panel
 document.getElementById("jumpBtn").onclick=()=>{
@@ -2238,14 +2581,6 @@ document.getElementById("tabs").onclick=e=>{
 
 document.getElementById("chainCancelBtn").onclick=cancelChainMode;
 
-document.getElementById("searchIconBtn").onclick=()=>{
-  if(settingsOpen) toggleSettingsPage();
-  searchOpen=!searchOpen;
-  if(searchOpen){S.sq="";openFormula=null;openShortcut=null;}
-  syncTabClasses();
-  render();
-  setTimeout(renderSortBar,0);
-};
 
 document.getElementById("settingsBtn").onclick=toggleSettingsPage;
 document.getElementById("settings-overlay").onclick=toggleSettingsPage;
